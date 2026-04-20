@@ -1,0 +1,176 @@
+[gd_scene load_steps=24 format=3]
+
+[ext_resource type="Script" path="res://main.gd" id="1_main"]
+[ext_resource type="Script" path="res://player_fps.gd" id="2_player"]
+[ext_resource type="Shader" path="res://sphere_c_phong.gdshader" id="3_phong"]
+[ext_resource type="Texture2D" path="res://textures/floor_albedo.svg" id="4_floor_tex"]
+[ext_resource type="Texture2D" path="res://textures/wall_paint_albedo.svg" id="5_wall_tex"]
+[ext_resource type="Texture2D" path="res://textures/prism_albedo.svg" id="6_prism_tex"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_floor"]
+size = Vector3(8, 0.2, 8)
+
+[sub_resource type="BoxMesh" id="BoxMesh_side_wall"]
+size = Vector3(0.2, 4, 8)
+
+[sub_resource type="BoxMesh" id="BoxMesh_back_wall"]
+size = Vector3(8, 4, 0.2)
+
+[sub_resource type="SphereMesh" id="SphereMesh_scene"]
+radius = 0.7
+height = 1.4
+
+[sub_resource type="BoxMesh" id="BoxMesh_prism_left"]
+size = Vector3(1.1, 2.2, 1.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_prism_right"]
+size = Vector3(1.4, 1.4, 1.4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_neutral"]
+albedo_color = Color(0.85098, 0.85098, 0.85098, 1)
+albedo_texture = ExtResource("4_floor_tex")
+metallic = 0.0
+roughness = 0.85
+uv1_scale = Vector3(2.1, 2.1, 2.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wall_back"]
+albedo_color = Color(0.85098, 0.85098, 0.85098, 1)
+albedo_texture = ExtResource("5_wall_tex")
+metallic = 0.0
+roughness = 0.85
+uv1_scale = Vector3(1.35, 1.35, 1.35)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_red"]
+albedo_color = Color(0.74, 0.18, 0.17, 1)
+albedo_texture = ExtResource("5_wall_tex")
+metallic = 0.0
+roughness = 0.85
+uv1_scale = Vector3(1.35, 1.35, 1.35)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_green"]
+albedo_color = Color(0.22, 0.58, 0.25, 1)
+albedo_texture = ExtResource("5_wall_tex")
+metallic = 0.0
+roughness = 0.85
+uv1_scale = Vector3(1.35, 1.35, 1.35)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_prism"]
+albedo_color = Color(0.78, 0.78, 0.78, 1)
+albedo_texture = ExtResource("6_prism_tex")
+metallic = 0.0
+roughness = 0.85
+uv1_scale = Vector3(1.6, 1.6, 1.6)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sphere_a"]
+albedo_color = Color(0.58, 0.67, 0.84, 1)
+metallic = 0.0
+roughness = 0.4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sphere_b"]
+albedo_color = Color(0.73, 0.73, 0.76, 1)
+metallic = 1.0
+roughness = 0.2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sphere_c"]
+shader = ExtResource("3_phong")
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_scene"]
+
+[sub_resource type="Sky" id="Sky_scene"]
+sky_material = SubResource("ProceduralSkyMaterial_scene")
+
+[sub_resource type="Environment" id="Environment_scene"]
+background_mode = 2
+sky = SubResource("Sky_scene")
+background_energy_multiplier = 0.18
+ambient_light_source = 0
+reflected_light_source = 0
+ssao_enabled = true
+ssao_radius = 1.1
+ssao_intensity = 1.35
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_main")
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0, 0)
+mesh = SubResource("BoxMesh_floor")
+material_override = SubResource("StandardMaterial3D_neutral")
+
+[node name="WallLeft" type="MeshInstance3D" parent="."]
+position = Vector3(-4, 2, 0)
+mesh = SubResource("BoxMesh_side_wall")
+material_override = SubResource("StandardMaterial3D_red")
+
+[node name="WallRight" type="MeshInstance3D" parent="."]
+position = Vector3(4, 2, 0)
+mesh = SubResource("BoxMesh_side_wall")
+material_override = SubResource("StandardMaterial3D_green")
+
+[node name="WallBack" type="MeshInstance3D" parent="."]
+position = Vector3(0, 2, -4)
+mesh = SubResource("BoxMesh_back_wall")
+material_override = SubResource("StandardMaterial3D_wall_back")
+
+[node name="SphereA" type="MeshInstance3D" parent="."]
+position = Vector3(-1.8, 0.7, 0.6)
+mesh = SubResource("SphereMesh_scene")
+material_override = SubResource("StandardMaterial3D_sphere_a")
+
+[node name="SphereB" type="MeshInstance3D" parent="."]
+position = Vector3(0, 0.7, 0.3)
+mesh = SubResource("SphereMesh_scene")
+material_override = SubResource("StandardMaterial3D_sphere_b")
+
+[node name="SphereC" type="MeshInstance3D" parent="."]
+position = Vector3(1.8, 0.7, 0.6)
+mesh = SubResource("SphereMesh_scene")
+material_override = SubResource("ShaderMaterial_sphere_c")
+
+[node name="PrismLeft" type="MeshInstance3D" parent="."]
+position = Vector3(-1.8, 1.1, -2.6)
+mesh = SubResource("BoxMesh_prism_left")
+material_override = SubResource("StandardMaterial3D_prism")
+
+[node name="PrismRight" type="MeshInstance3D" parent="."]
+position = Vector3(1.8, 0.7, -2.4)
+mesh = SubResource("BoxMesh_prism_right")
+material_override = SubResource("StandardMaterial3D_prism")
+
+[node name="Light1" type="DirectionalLight3D" parent="."]
+rotation_degrees = Vector3(-45, 30, 0)
+light_color = Color(1, 0.98, 0.94, 1)
+light_energy = 1.8
+shadow_enabled = true
+
+[node name="Light2" type="OmniLight3D" parent="."]
+position = Vector3(-3, 2.2, 1.2)
+light_color = Color(0.95, 0.96, 1, 1)
+light_energy = 0.9
+omni_range = 11.0
+shadow_enabled = true
+
+[node name="Light3" type="OmniLight3D" parent="."]
+position = Vector3(0, 3.5, 0)
+light_color = Color(1, 1, 1, 1)
+light_energy = 0.45
+omni_range = 9.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_scene")
+
+[node name="CameraOutside" type="Camera3D" parent="."]
+position = Vector3(0, 3.2, 8.5)
+rotation_degrees = Vector3(-12, 0, 0)
+current = true
+
+[node name="CameraInside" type="Camera3D" parent="."]
+position = Vector3(0, 2.5, 2.2)
+rotation_degrees = Vector3(-10, 0, 0)
+
+[node name="PlayerFPS" type="Node3D" parent="."]
+position = Vector3(0, 1.6, 5.5)
+script = ExtResource("2_player")
+
+[node name="CameraFPS" type="Camera3D" parent="PlayerFPS"]
+position = Vector3(0, 0, 0)
