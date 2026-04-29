@@ -21,9 +21,9 @@ Escena interactiva en Godot 4.6 (Forward+) baseada nunha **Cornell Box simplific
 
 | Tecla | Acción |
 |-------|--------|
-| F7 | Cámara fixa exterior (vista completa) |
-| F8 | Cámara fixa interior (tiro alto) |
-| F9 | Cámara FPS (WASD + rato) |
+| F1 | Cámara fixa exterior (vista completa) |
+| F2 | Cámara fixa interior (tiro alto) |
+| F3 | Cámara FPS (WASD + rato) |
 | 1 | Activar/desactivar Luz 1 (DirectionalLight3D) |
 | 2 | Activar/desactivar Luz 2 (OmniLight3D lateral) |
 | 3 | Activar/desactivar Luz 3 (OmniLight3D superior) |
