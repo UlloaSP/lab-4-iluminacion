@@ -2,14 +2,20 @@ shader_type spatial;
 render_mode cull_back;
 
 uniform vec4 base_color : source_color = vec4(0.78, 0.78, 0.82, 1.0);
+uniform sampler2D albedo_texture : source_color, hint_default_white;
+uniform bool use_texture = false;
 uniform float ambient_strength : hint_range(0.0, 1.0) = 0.04;
 uniform float shininess : hint_range(1.0, 256.0) = 16.0;
 uniform float specular_strength : hint_range(0.0, 2.0) = 0.2;
 
 void fragment() {
-	ALBEDO = base_color.rgb;
+	vec3 color = base_color.rgb;
+	if (use_texture) {
+		color *= texture(albedo_texture, UV).rgb;
+	}
+	ALBEDO = color;
 	ALPHA = base_color.a;
-	EMISSION = base_color.rgb * ambient_strength;
+	EMISSION = color * ambient_strength;
 }
 
 void light() {

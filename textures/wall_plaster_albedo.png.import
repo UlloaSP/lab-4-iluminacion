@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bdy7misxsco5y"
-path.s3tc="res://.godot/imported/wall_paint_albedo.svg-3f5951bc5d7b303f623152015931e1e9.s3tc.ctex"
+uid="uid://chltofny4hy4d"
+path.s3tc="res://.godot/imported/wall_plaster_albedo.png-8828fad80e0810a67282bd73236d5259.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://textures/wall_paint_albedo.svg"
-dest_files=["res://.godot/imported/wall_paint_albedo.svg-3f5951bc5d7b303f623152015931e1e9.s3tc.ctex"]
+source_file="res://textures/wall_plaster_albedo.png"
+dest_files=["res://.godot/imported/wall_plaster_albedo.png-8828fad80e0810a67282bd73236d5259.s3tc.ctex"]
 
 [params]
 
@@ -39,6 +39,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=0
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false
